@@ -27,7 +27,7 @@ public class UrlShortenerController {
     public UrlShortenerResponse urlShortener (@RequestBody UrlShortenerRequest request) {
         log.info("Request to short following url : " + request.getLongUrl());
         UrlShortenerResponse response = new UrlShortenerResponse();
-        response.setShortUrl(base62Encoding.encodeNumber(currentCounter));
+        response.setShortUrl(base62Encoding.encodeNumber(currentCounter++));
         response.setLongUrl(request.getLongUrl());
         return response;
     }
