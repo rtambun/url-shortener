@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
+import javax.persistence.EntityNotFoundException;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -38,5 +40,22 @@ class ShortenUrlServiceTest {
         UrlPair actualUrlPair = captorUrlPair.getValue();
         UrlPair expectedUrlPair = new UrlPair(null, "shortUrl", "longUrl");
         assertThat(actualUrlPair).usingRecursiveComparison().isEqualTo(expectedUrlPair);
+    }
+
+    @Test
+    void retrieveLongUrl_NormalExecution() {
+        when(urlPairRepository.findByShortUrl(anyString())).thenReturn(new UrlPair(null,
+                "shortUrl",
+                "longUrl"));
+
+        String longUrl = shortenUrlService.retrieveLongUrl("shortUrl");
+        assertThat(longUrl).isEqualTo("longUrl");
+    }
+
+    @Test
+    void retrieveLongUrl_ShortUrlNotFound_ThrowEntityNotFoundException() {
+        when(urlPairRepository.findByShortUrl(anyString())).thenReturn(null);
+
+        assertThrows(EntityNotFoundException.class,() -> shortenUrlService.retrieveLongUrl("shortUrl"));
     }
 }

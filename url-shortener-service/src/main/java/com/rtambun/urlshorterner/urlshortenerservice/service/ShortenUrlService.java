@@ -2,7 +2,10 @@ package com.rtambun.urlshorterner.urlshortenerservice.service;
 
 import com.rtambun.urlshorterner.urlshortenerservice.model.UrlPair;
 import com.rtambun.urlshorterner.urlshortenerservice.repository.UrlPairRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityNotFoundException;
 
 @Service
 public class ShortenUrlService {
@@ -25,4 +28,11 @@ public class ShortenUrlService {
         return shortUrl;
     }
 
+    public String retrieveLongUrl(String shortUrl) throws EntityNotFoundException {
+        UrlPair url = urlPairRepository.findByShortUrl(shortUrl);
+        if (url == null) {
+            throw new EntityNotFoundException();
+        }
+        return url.getLongUrl();
+    }
 }
