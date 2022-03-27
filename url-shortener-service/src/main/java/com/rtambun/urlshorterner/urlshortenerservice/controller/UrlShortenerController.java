@@ -23,8 +23,8 @@ public class UrlShortenerController {
         this.shortenUrlService = shortenUrlService;
     }
 
-    @PostMapping(value = "/url-shortener")
-    public UrlShortenerResponse urlShortener (@RequestBody UrlShortenerRequest request) {
+    @PostMapping(value = "/shortUrl")
+    public UrlShortenerResponse createShortUrl(@RequestBody UrlShortenerRequest request) {
         log.info("Request to short following url : " + request.getLongUrl());
         UrlShortenerResponse response = new UrlShortenerResponse();
         response.setShortUrl(shortenUrlService.shortenUrl(request.getLongUrl()));
