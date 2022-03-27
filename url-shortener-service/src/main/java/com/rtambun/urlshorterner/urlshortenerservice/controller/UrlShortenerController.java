@@ -3,6 +3,7 @@ package com.rtambun.urlshorterner.urlshortenerservice.controller;
 import com.rtambun.urlshorterner.urlshortenerservice.dto.UrlShortenerRequest;
 import com.rtambun.urlshorterner.urlshortenerservice.dto.UrlShortenerResponse;
 import com.rtambun.urlshorterner.urlshortenerservice.service.Base62Encoding;
+import com.rtambun.urlshorterner.urlshortenerservice.service.ShortenUrlService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,18 +17,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Log4j2
 public class UrlShortenerController {
 
-    private Base62Encoding base62Encoding;
-    private long currentCounter = 0;
+    private ShortenUrlService shortenUrlService;
 
-    public UrlShortenerController(Base62Encoding base62Encoding) {
-        this.base62Encoding = base62Encoding;
+    public UrlShortenerController(ShortenUrlService shortenUrlService) {
+        this.shortenUrlService = shortenUrlService;
     }
 
     @PostMapping(value = "/url-shortener")
     public UrlShortenerResponse urlShortener (@RequestBody UrlShortenerRequest request) {
         log.info("Request to short following url : " + request.getLongUrl());
         UrlShortenerResponse response = new UrlShortenerResponse();
-        response.setShortUrl(base62Encoding.encodeNumber(currentCounter++));
+        response.setShortUrl(shortenUrlService.shortenUrl(request.getLongUrl()));
         response.setLongUrl(request.getLongUrl());
         return response;
     }
