@@ -9,6 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UrlShortenerRequest {
+public class ShortUrlRequest {
     private String longUrl;
 }

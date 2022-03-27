@@ -1,7 +1,7 @@
 package com.rtambun.urlshorterner.urlshortenerservice.controller;
 
 import com.rtambun.urlshorterner.urlshortenerservice.dto.LongUrlRequest;
-import com.rtambun.urlshorterner.urlshortenerservice.dto.UrlShortenerRequest;
+import com.rtambun.urlshorterner.urlshortenerservice.dto.ShortUrlRequest;
 import com.rtambun.urlshorterner.urlshortenerservice.dto.UrlResponse;
 import com.rtambun.urlshorterner.urlshortenerservice.service.ShortenUrlService;
 import lombok.extern.log4j.Log4j2;
@@ -25,7 +25,7 @@ public class UrlShortenerController {
     }
 
     @PostMapping(value = "/shortUrl")
-    public UrlResponse createShortUrl(@RequestBody UrlShortenerRequest request) {
+    public UrlResponse createShortUrl(@RequestBody ShortUrlRequest request) {
         log.info("Request to short following url : " + request.getLongUrl());
         UrlResponse response = new UrlResponse();
         response.setShortUrl(shortenUrlService.shortenUrl(request.getLongUrl()));
