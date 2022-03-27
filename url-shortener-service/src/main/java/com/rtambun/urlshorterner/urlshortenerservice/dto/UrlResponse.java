@@ -9,7 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class UrlShortenerResponse {
+public class UrlResponse {
     private String shortUrl;
     private String longUrl;
 }

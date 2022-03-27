@@ -1,7 +1,7 @@
 package com.rtambun.urlshorterner.urlshortenerservice.controller;
 
 import com.rtambun.urlshorterner.urlshortenerservice.dto.UrlShortenerRequest;
-import com.rtambun.urlshorterner.urlshortenerservice.dto.UrlShortenerResponse;
+import com.rtambun.urlshorterner.urlshortenerservice.dto.UrlResponse;
 import com.rtambun.urlshorterner.urlshortenerservice.service.ShortenUrlService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,7 @@ class UrlShortenerControllerTest {
 
         UrlShortenerRequest urlShortenerRequest = new UrlShortenerRequest();
         urlShortenerRequest.setLongUrl("anyUrl");
-        UrlShortenerResponse actual = urlShortenerController.createShortUrl(urlShortenerRequest);
+        UrlResponse actual = urlShortenerController.createShortUrl(urlShortenerRequest);
 
         verify(shortenUrlService, times(1)).shortenUrl("anyUrl");
 
