@@ -19,13 +19,11 @@ public class CounterRangeServerClient {
 
     private String counterRangeServerUrl;
     private WebClient webClient;
-    private ModelMapper modelMapper;
 
     public CounterRangeServerClient(@Value("{counter_range.url}") String counterRangeServerUrl,
                                     ModelMapper modelMapper) {
         this.counterRangeServerUrl = counterRangeServerUrl;
         webClient = WebClient.create(counterRangeServerUrl);
-        this.modelMapper = modelMapper;
     }
 
     public Mono<CounterRangeResponse> getCounterRange() {

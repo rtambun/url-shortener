@@ -4,17 +4,17 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class UrlShortenerResponseTest {
+class UrlResponseTest {
 
     @Test
-    void urlShortenerResponse_AllArgsConstructor() {
+    void urlResponse_AllArgsConstructor() {
         UrlResponse actual = new UrlResponse("shortUrl", "anyUrl");
         assertThat(actual.getShortUrl()).isEqualTo("shortUrl");
         assertThat(actual.getLongUrl()).isEqualTo("anyUrl");
     }
 
     @Test
-    void urlShortenerResponse_NoArgsConstructor() {
+    void urlResponse_NoArgsConstructor() {
         UrlResponse actual = new UrlResponse();
         actual.setShortUrl("shortUrl");
         actual.setLongUrl("anyUrl");
